@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>多功能博客网站</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            background-color: #f0f0f5;
+            color: #333;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+        body.loaded {
+            opacity: 1;
+        }
+        header {
+            background-color: #4a90e2;
+            color: white;
+            padding: 15px 0;
+            text-align: center;
+        }
+        nav {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+        }
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        nav button {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            display: none;
+        }
+        #menu {
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .post-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .post {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            flex: 1 0 30%;
+            margin: 20px 0;
+            padding: 20px;
+            border-bottom: 3px solid #4a90e2;
+        }
+        .post img {
+            max-width: 100%;
+            border-radius: 8px;
+        }
+        .post h2 {
+            color: #4a90e2;
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            margin-top: 40px;
+        }
+        .single-post {
+            margin-top: 40px;
+        }
+        .contact-form {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .contact-form label {
+            display: block;
+            margin: 15px 0 5px;
+        }
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .contact-form button {
+            background-color: #4a90e2;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .contact-form button:hover {
+            background-color: #007BFF;
+        }
+        #toTop {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #4a90e2;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            display: none;
+        }
+        @media (max-width: 768px) {
+            nav button {
+                display: block;
+            }
+            #menu {
+                display: none;
+                flex-direction: column;
+            }
+            .post {
+                flex: 1 0 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>我的博客网站</h1>
+    </header>
+
+    <nav>
+        <button id="menu-toggle">☰</button>
+        <div id="menu">
+            <a href="#home">主页</a>
+            <a href="#posts">文章列表</a>
+            <a href="#contact">联系我</a>
+        </div>
+    </nav>
+
+    <div class="container" id="home">
+        <h2>欢迎来到我的博客</h2>
+        <p>在这里，你会找到各种有趣的文章和故事。</p>
+        <input type="text" id="search" placeholder="搜索文章">
+    </div>
+
+    <div class="container" id="posts">
+        <h2>博客文章列表</h2>
+        <div class="post-list">
+            <div class="post">
+                <h2>文章标题一</h2>
+                <img src="path/to/image1.jpg" alt="Image 1">
+                <p>这是一篇关于某个主题的精彩文章……</p>
+                <a href="#single-post1">阅读更多</a>
+            </div>
+            <div class="post">
+                <h2>文章标题二</h2>
+                <img src="path/to/image2.jpg" alt="Image 2">
+                <p>这是一篇关于某个主题的精彩文章……</p>
+                <a href="#single-post2">阅读更多</a>
+            </div>
+            <div class="post">
+                <h2>文章标题三</h2>
+                <img src="path/to/image3.jpg" alt="Image 3">
+                <p>这是一篇关于某个主题的精彩文章……</p>
+                <a href="#single-post3">阅读更多</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container single-post" id="single-post1">
+        <h2>单篇文章：文章标题一</h2>
+        <p>这里是文章的完整内容。通过这篇文章，你可以深入了解某个主题。</p>
+    </div>
+
+    <div class="container" id="contact">
+        <h2>联系我</h2>
+        <form class="contact-form">
+            <label for="name">姓名：</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">邮箱：</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="message">信息：</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+
+            <button type="submit">发送</button>
+        </form>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 XTYL473 - 保留所有权利。</p>
+    </footer>
+
+    <button id="toTop">⬆️ 回顶部</button>
+
+    <script>
+        window.addEventListener('load', () => {
+            document.body.classList.add('loaded');
+        });
+
+        document.getElementById('menu-toggle').addEventListener('click', () => {
+            const menu = document.getElementById('menu');
+            menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+        });
+
+        document.getElementById('search').addEventListener('input', function() {
+            const query = this.value.toLowerCase();
+            const posts = document.querySelectorAll('.post');
+            posts.forEach(post => {
+                const title = post.querySelector('h2').textContent.toLowerCase();
+                post.style.display = title.includes(query) ? 'block' : 'none';
+            });
+        });
+
+        const toTopButton = document.getElementById('toTop');
+        window.onscroll = function() {
+            document.documentElement.scrollTop > 200 ? toTopButton.style.display = 'block' : toTopButton.style.display = 'none';
+        };
+
+        toTopButton.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        document.querySelector('.contact-form').addEventListener('submit', function(event) {
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            
+            if (!name || !email) {
+                alert('请填写所有字段');
+                event.preventDefault();
+            } else {
+                alert('表单已成功提交！');
+                event.preventDefault();
+            }
+        });
+    </script>
+</body>
+</html>
