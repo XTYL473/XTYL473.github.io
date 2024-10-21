@@ -127,9 +127,7 @@
             cursor: pointer;
             display: none;
         }
-        canvas {
-            background-color: #fff;
-            border: 1px solid #000;
+        canvas, #startButton {
             display: block;
             margin: 20px auto;
         }
@@ -199,7 +197,8 @@
 
     <div class="container" id="game">
         <h2>贪吃蛇游戏</h2>
-        <canvas id="gameCanvas" width="400" height="400"></canvas>
+        <button id="startButton">开始游戏</button>
+        <canvas id="gameCanvas" width="400" height="400" style="display:none;"></canvas>
     </div>
 
     <div class="container" id="contact">
@@ -347,7 +346,12 @@
             }
         }
 
-        let game = setInterval(draw, 100);
+        let game;
+        document.getElementById('startButton').addEventListener('click', () => {
+            canvas.style.display = 'block';
+            document.getElementById('startButton').style.display = 'none';
+            game = setInterval(draw, 100);
+        });
     </script>
 </body>
 </html>
