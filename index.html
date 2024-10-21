@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>D Toy的blog</title>
+    <title>多功能博客网站</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -127,6 +127,12 @@
             cursor: pointer;
             display: none;
         }
+        canvas {
+            background-color: #fff;
+            border: 1px solid #000;
+            display: block;
+            margin: 20px auto;
+        }
         @media (max-width: 768px) {
             nav button {
                 display: block;
@@ -143,7 +149,7 @@
 </head>
 <body>
     <header>
-        <h1>D Toy的blog</h1>
+        <h1>我的博客网站</h1>
     </header>
 
     <nav>
@@ -151,6 +157,7 @@
         <div id="menu">
             <a href="#home">主页</a>
             <a href="#posts">文章列表</a>
+            <a href="#game">贪吃蛇游戏</a>
             <a href="#contact">联系我</a>
         </div>
     </nav>
@@ -167,7 +174,7 @@
             <div class="post">
                 <h2>文章标题一</h2>
                 <img src="path/to/image1.jpg" alt="Image 1">
-                <p>冷知识：你的说人生十分纽币……</p>
+                <p>这是一篇关于某个主题的精彩文章……</p>
                 <a href="#single-post1">阅读更多</a>
             </div>
             <div class="post">
@@ -177,10 +184,10 @@
                 <a href="#single-post2">阅读更多</a>
             </div>
             <div class="post">
-                <h2>Toy的动画</h2>
+                <h2>文章标题三</h2>
                 <img src="path/to/image3.jpg" alt="Image 3">
-                <p>这是Toy做的动画捏……</p>
-                <a href="Gandi-TW、SC、gandi动画.sb3">下载</a>
+                <p>这是一篇关于某个主题的精彩文章……</p>
+                <a href="#single-post3">阅读更多</a>
             </div>
         </div>
     </div>
@@ -188,6 +195,11 @@
     <div class="container single-post" id="single-post1">
         <h2>单篇文章：文章标题一</h2>
         <p>这里是文章的完整内容。通过这篇文章，你可以深入了解某个主题。</p>
+    </div>
+
+    <div class="container" id="game">
+        <h2>贪吃蛇游戏</h2>
+        <canvas id="gameCanvas" width="400" height="400"></canvas>
     </div>
 
     <div class="container" id="contact">
@@ -252,6 +264,90 @@
                 event.preventDefault();
             }
         });
+
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+
+        const box = 20;
+        const rows = canvas.height / box;
+        const cols = canvas.width / box;
+
+        let snake = [{ x: 9 * box, y: 9 * box }];
+        let direction = 'RIGHT';
+        let food = {
+            x: Math.floor(Math.random() * cols) * box,
+            y: Math.floor(Math.random() * rows) * box
+        };
+
+        document.addEventListener('keydown', directionControl);
+
+        function directionControl(event) {
+            if (event.keyCode == 37 && direction != 'RIGHT') {
+                direction = 'LEFT';
+            } else if (event.keyCode == 38 && direction != 'DOWN') {
+                direction = 'UP';
+            } else if (event.keyCode == 39 && direction != 'LEFT') {
+                direction = 'RIGHT';
+            } else if (event.keyCode == 40 && direction != 'UP') {
+                direction = 'DOWN';
+            }
+        }
+
+        function collision(head, array) {
+            for (let i = 0; i < array.length; i++) {
+                if (head.x === array[i].x && head.y === array[i].y) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // 绘制食物
+            ctx.fillStyle = 'green';
+            ctx.fillRect(food.x, food.y, box, box);
+
+            // 更新蛇头位置
+            let snakeX = snake[0].x;
+            let snakeY = snake[0].y;
+
+            if (direction == 'LEFT') snakeX -= box;
+            if (direction == 'UP') snakeY -= box;
+            if (direction == 'RIGHT') snakeX += box;
+            if (direction == 'DOWN') snakeY += box;
+
+            // 检查蛇是否吃到食物
+            if (snakeX === food.x && snakeY === food.y) {
+                food = {
+                    x: Math.floor(Math.random() * cols) * box,
+                    y: Math.floor(Math.random() * rows) * box
+                };
+            } else {
+                snake.pop();
+            }
+
+            // 添加新头部
+            let newHead = { x: snakeX, y: snakeY };
+
+            // 检查碰撞
+            if (snakeX < 0 || snakeY < 0 || snakeX >= canvas.width || snakeY >= canvas.height || collision(newHead, snake)) {
+                clearInterval(game);
+                alert('游戏结束！');
+                return;
+            }
+
+            snake.unshift(newHead);
+
+            // 绘制蛇
+            ctx.fillStyle = 'black';
+            for (let i = 0; i < snake.length; i++) {
+                ctx.fillRect(snake[i].x, snake[i].y, box, box);
+            }
+        }
+
+        let game = setInterval(draw, 100);
     </script>
 </body>
 </html>
