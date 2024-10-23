@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>多功能博客网站</title>
+    <title>消消乐的网站</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -11,12 +11,7 @@
             padding: 0;
             line-height: 1.6;
             background-color: #f0f0f5;
-            color: #333;
-            opacity: 0;
-            transition: opacity 0.5s;
-        }
-        body.loaded {
-            opacity: 1;
+            overflow-x: hidden;
         }
         header {
             background-color: #4a90e2;
@@ -25,57 +20,25 @@
             text-align: center;
         }
         nav {
+            display: flex;
+            justify-content: center;
             background-color: #333;
             color: white;
-            text-align: center;
-            padding: 10px 0;
         }
         nav a {
             color: white;
             margin: 0 15px;
             text-decoration: none;
-            font-weight: bold;
+            padding: 15px 0;
+            display: block;
         }
         nav a:hover {
-            text-decoration: underline;
-        }
-        nav button {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 24px;
-            cursor: pointer;
-            display: none;
-        }
-        #menu {
-            display: flex;
-            justify-content: center;
+            background-color: #4a90e2;
         }
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
-        }
-        .post-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-        .post {
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            flex: 1 0 30%;
-            margin: 20px 0;
-            padding: 20px;
-            border-bottom: 3px solid #4a90e2;
-        }
-        .post img {
-            max-width: 100%;
-            border-radius: 8px;
-        }
-        .post h2 {
-            color: #4a90e2;
         }
         footer {
             background-color: #333;
@@ -84,274 +47,36 @@
             padding: 15px 0;
             margin-top: 40px;
         }
-        .single-post {
-            margin-top: 40px;
-        }
-        .contact-form {
-            background-color: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        .contact-form label {
-            display: block;
-            margin: 15px 0 5px;
-        }
-        .contact-form input,
-        .contact-form textarea {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        .contact-form button {
-            background-color: #4a90e2;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
-        .contact-form button:hover {
-            background-color: #007BFF;
-        }
-        #toTop {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: #4a90e2;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            display: none;
-        }
-        canvas, #startButton {
-            display: block;
-            margin: 20px auto;
-        }
-        @media (max-width: 768px) {
-            nav button {
-                display: block;
-            }
-            #menu {
-                display: none;
-                flex-direction: column;
-            }
-            .post {
-                flex: 1 0 100%;
-            }
-        }
     </style>
 </head>
 <body>
     <header>
-        <h1>我的博客网站</h1>
+        <h1>欢迎来到消消乐的网站</h1>
     </header>
 
     <nav>
-        <button id="menu-toggle">☰</button>
-        <div id="menu">
-            <a href="#home">主页</a>
-            <a href="#posts">文章列表</a>
-            <a href="#game">贪吃蛇游戏</a>
-            <a href="#contact">联系我</a>
-        </div>
+        <a href="#home">主页</a>
+        <a href="#about">关于我们</a>
+        <a href="#contact">联系我们</a>
     </nav>
 
     <div class="container" id="home">
-        <h2>欢迎来到我的博客</h2>
-        <p>在这里，你会找到各种有趣的文章和故事。</p>
-        <input type="text" id="search" placeholder="搜索文章">
+        <h2>主页</h2>
+        <p>欢迎访问“消消乐的网站”，这里提供丰富的游戏信息和娱乐内容。</p>
     </div>
 
-    <div class="container" id="posts">
-        <h2>博客文章列表</h2>
-        <div class="post-list">
-            <div class="post">
-                <h2>文章标题一</h2>
-                <img src="path/to/image1.jpg" alt="Image 1">
-                <p>这是一篇关于某个主题的精彩文章……</p>
-                <a href="#single-post1">阅读更多</a>
-            </div>
-            <div class="post">
-                <h2>文章标题二</h2>
-                <img src="path/to/image2.jpg" alt="Image 2">
-                <p>这是一篇关于某个主题的精彩文章……</p>
-                <a href="#single-post2">阅读更多</a>
-            </div>
-            <div class="post">
-                <h2>文章标题三</h2>
-                <img src="path/to/image3.jpg" alt="Image 3">
-                <p>这是一篇关于某个主题的精彩文章……</p>
-                <a href="#single-post3">阅读更多</a>
-            </div>
-        </div>
-    </div>
-
-    <div class="container single-post" id="single-post1">
-        <h2>单篇文章：文章标题一</h2>
-        <p>这里是文章的完整内容。通过这篇文章，你可以深入了解某个主题。</p>
-    </div>
-
-    <div class="container" id="game">
-        <h2>贪吃蛇游戏</h2>
-        <button id="startButton">开始游戏</button>
-        <canvas id="gameCanvas" width="400" height="400" style="display:none;"></canvas>
+    <div class="container" id="about">
+        <h2>关于我们</h2>
+        <p>“消消乐的网站”致力于为游戏爱好者提供多样化的娱乐和互动体验。</p>
     </div>
 
     <div class="container" id="contact">
-        <h2>联系我</h2>
-        <form class="contact-form">
-            <label for="name">姓名：</label>
-            <input type="text" id="name" name="name" required>
-
-            <label for="email">邮箱：</label>
-            <input type="email" id="email" name="email" required>
-
-            <label for="message">信息：</label>
-            <textarea id="message" name="message" rows="5" required></textarea>
-
-            <button type="submit">发送</button>
-        </form>
+        <h2>联系我们</h2>
+        <p>如果您有任何问题或建议，请通过我们的联系页面与我们沟通。</p>
     </div>
 
     <footer>
-        <p>&copy; 2024 XTYL473 - 保留所有权利。</p>
+        <p>&copy; 2024 消消乐的网站 - 保留所有权利。</p>
     </footer>
-
-    <button id="toTop">⬆️ 回顶部</button>
-
-    <script>
-        window.addEventListener('load', () => {
-            document.body.classList.add('loaded');
-        });
-
-        document.getElementById('menu-toggle').addEventListener('click', () => {
-            const menu = document.getElementById('menu');
-            menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
-        });
-
-        document.getElementById('search').addEventListener('input', function() {
-            const query = this.value.toLowerCase();
-            const posts = document.querySelectorAll('.post');
-            posts.forEach(post => {
-                const title = post.querySelector('h2').textContent.toLowerCase();
-                post.style.display = title.includes(query) ? 'block' : 'none';
-            });
-        });
-
-        const toTopButton = document.getElementById('toTop');
-        window.onscroll = function() {
-            document.documentElement.scrollTop > 200 ? toTopButton.style.display = 'block' : toTopButton.style.display = 'none';
-        };
-
-        toTopButton.addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-
-        document.querySelector('.contact-form').addEventListener('submit', function(event) {
-            const name = document.getElementById('name').value.trim();
-            const email = document.getElementById('email').value.trim();
-            
-            if (!name || !email) {
-                alert('请填写所有字段');
-                event.preventDefault();
-            } else {
-                alert('表单已成功提交！');
-                event.preventDefault();
-            }
-        });
-
-        const canvas = document.getElementById('gameCanvas');
-        const ctx = canvas.getContext('2d');
-
-        const box = 20;
-        const rows = canvas.height / box;
-        const cols = canvas.width / box;
-
-        let snake = [{ x: 9 * box, y: 9 * box }];
-        let direction = 'RIGHT';
-        let food = {
-            x: Math.floor(Math.random() * cols) * box,
-            y: Math.floor(Math.random() * rows) * box
-        };
-
-        document.addEventListener('keydown', directionControl);
-
-        function directionControl(event) {
-            if (event.keyCode == 37 && direction != 'RIGHT') {
-                direction = 'LEFT';
-            } else if (event.keyCode == 38 && direction != 'DOWN') {
-                direction = 'UP';
-            } else if (event.keyCode == 39 && direction != 'LEFT') {
-                direction = 'RIGHT';
-            } else if (event.keyCode == 40 && direction != 'UP') {
-                direction = 'DOWN';
-            }
-        }
-
-        function collision(head, array) {
-            for (let i = 0; i < array.length; i++) {
-                if (head.x === array[i].x && head.y === array[i].y) {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        function draw() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
-            // 绘制食物
-            ctx.fillStyle = 'green';
-            ctx.fillRect(food.x, food.y, box, box);
-
-            // 更新蛇头位置
-            let snakeX = snake[0].x;
-            let snakeY = snake[0].y;
-
-            if (direction == 'LEFT') snakeX -= box;
-            if (direction == 'UP') snakeY -= box;
-            if (direction == 'RIGHT') snakeX += box;
-            if (direction == 'DOWN') snakeY += box;
-
-            // 检查蛇是否吃到食物
-            if (snakeX === food.x && snakeY === food.y) {
-                food = {
-                    x: Math.floor(Math.random() * cols) * box,
-                    y: Math.floor(Math.random() * rows) * box
-                };
-            } else {
-                snake.pop();
-            }
-
-            // 添加新头部
-            let newHead = { x: snakeX, y: snakeY };
-
-            // 检查碰撞
-            if (snakeX < 0 || snakeY < 0 || snakeX >= canvas.width || snakeY >= canvas.height || collision(newHead, snake)) {
-                clearInterval(game);
-                alert('游戏结束！');
-                return;
-            }
-
-            snake.unshift(newHead);
-
-            // 绘制蛇
-            ctx.fillStyle = 'black';
-            for (let i = 0; i < snake.length; i++) {
-                ctx.fillRect(snake[i].x, snake[i].y, box, box);
-            }
-        }
-
-        let game;
-        document.getElementById('startButton').addEventListener('click', () => {
-            canvas.style.display = 'block';
-            document.getElementById('startButton').style.display = 'none';
-            game = setInterval(draw, 100);
-        });
-    </script>
 </body>
 </html>
