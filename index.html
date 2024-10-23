@@ -16,11 +16,16 @@
             color: white;
             padding: 20px 0;
             text-align: center;
+            border-radius: 10px;
+            margin: 10px;
         }
         nav {
             display: flex;
             justify-content: center;
             background-color: #333;
+            border-radius: 10px;
+            margin: 10px;
+            overflow: hidden;
         }
         nav a {
             color: white;
@@ -28,6 +33,7 @@
             text-decoration: none;
             padding: 15px;
             cursor: pointer;
+            transition: background-color 0.3s ease;
         }
         nav a:hover {
             background-color: #4a90e2;
@@ -36,9 +42,16 @@
             max-width: 1200px;
             margin: 20px auto;
             padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
         .content {
             display: none;
+        }
+        .game-content {
+            display: none;
+            text-align: center;
         }
         footer {
             background-color: #333;
@@ -46,6 +59,18 @@
             text-align: center;
             padding: 15px 0;
             margin-top: 40px;
+            border-radius: 10px;
+            margin: 10px;
+        }
+        button {
+            background-color: #4a90e2;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
         }
     </style>
 </head>
@@ -58,6 +83,11 @@
         <a onclick="showPage('home')">主页</a>
         <a onclick="showPage('about')">关于我们</a>
         <a onclick="showPage('contact')">联系我们</a>
+        <a onclick="showPage('game1')">游戏 1</a>
+        <a onclick="showPage('game2')">游戏 2</a>
+        <a onclick="showPage('game3')">游戏 3</a>
+        <a onclick="showPage('game4')">游戏 4</a>
+        <a onclick="showPage('game5')">游戏 5</a>
     </nav>
 
     <div id="home" class="container content" style="display:block;">
@@ -75,15 +105,92 @@
         <p>如果您有任何问题或建议，请通过我们的联系页面与我们沟通。</p>
     </div>
 
+    <!-- 游戏 1：点击计数 -->
+    <div id="game1" class="container game-content">
+        <h2>游戏 1：点击计数游戏</h2>
+        <button id="startGame1Button">开始</button>
+        <button id="clickGame1Button" style="display:none;">点击我！</button>
+        <p id="countGame1">点击：0</p>
+    </div>
+
+    <!-- 游戏 2：简单加法游戏 -->
+    <div id="game2" class="container game-content">
+        <h2>游戏 2：简单加法游戏</h2>
+        <button onclick="alert(prompt('5 + 3 = ?') == 8 ? '正确！' : '再试一次！')">开始</button>
+    </div>
+
+    <!-- 游戏 3：文字倒计时 -->
+    <div id="game3" class="container game-content">
+        <h2>游戏 3：文字倒计时</h2>
+        <button onclick="startGame3()">开始倒计时</button>
+        <p id="timerGame3"></p>
+    </div>
+
+    <!-- 游戏 4：猜数字 -->
+    <div id="game4" class="container game-content">
+        <h2>游戏 4：猜数字</h2>
+        <button onclick="guessNumber()">开始猜数字</button>
+    </div>
+
+    <!-- 游戏 5：颜色变化 -->
+    <div id="game5" class="container game-content">
+        <h2>游戏 5：颜色变化</h2>
+        <button onclick="changeColor()">改变背景颜色</button>
+    </div>
+
     <footer>
         <p>&copy; 2024 消消乐的网站 - 保留所有权利。</p>
     </footer>
 
     <script>
         function showPage(pageId) {
-            const contents = document.querySelectorAll('.content');
+            const contents = document.querySelectorAll('.content, .game-content');
             contents.forEach(content => content.style.display = 'none');
             document.getElementById(pageId).style.display = 'block';
+        }
+
+        // 游戏 1 代码
+        let count1 = 0;
+        document.getElementById("startGame1Button").addEventListener("click", function() {
+            count1 = 0;
+            document.getElementById("countGame1").textContent = "点击：0";
+            document.getElementById("clickGame1Button").style.display = "inline-block";
+        });
+
+        document.getElementById("clickGame1Button").addEventListener("click", function() {
+            count1++;
+            document.getElementById("countGame1").textContent = "点击：" + count1;
+        });
+
+        // 游戏 3 代码
+        function startGame3() {
+            let time = 5;
+            const timer = setInterval(function() {
+                if (time > 0) {
+                    document.getElementById("timerGame3").textContent = "时间剩余：" + time + " 秒";
+                    time--;
+                } else {
+                    clearInterval(timer);
+                    document.getElementById("timerGame3").textContent = "时间到！";
+                }
+            }, 1000);
+        }
+
+        // 游戏 4 代码
+        function guessNumber() {
+            const number = Math.floor(Math.random() * 10) + 1;
+            const guess = prompt("猜一个 1 到 10 的数字：");
+            if (parseInt(guess) === number) {
+                alert("恭喜你，猜对了！");
+            } else {
+                alert("很遗憾，正确答案是 " + number);
+            }
+        }
+
+        // 游戏 5 代码
+        function changeColor() {
+            const colors = ["#f0f0f5", "#f9e79f", "#aed6f1", "#f5b7b1", "#fadbd8"];
+            document.body.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
         }
     </script>
 </body>
