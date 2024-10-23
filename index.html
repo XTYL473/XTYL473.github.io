@@ -9,36 +9,36 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
-            line-height: 1.6;
             background-color: #f0f0f5;
-            overflow-x: hidden;
         }
         header {
             background-color: #4a90e2;
             color: white;
-            padding: 15px 0;
+            padding: 20px 0;
             text-align: center;
         }
         nav {
             display: flex;
             justify-content: center;
             background-color: #333;
-            color: white;
         }
         nav a {
             color: white;
             margin: 0 15px;
             text-decoration: none;
-            padding: 15px 0;
-            display: block;
+            padding: 15px;
+            cursor: pointer;
         }
         nav a:hover {
             background-color: #4a90e2;
         }
         .container {
             max-width: 1200px;
-            margin: 0 auto;
+            margin: 20px auto;
             padding: 20px;
+        }
+        .content {
+            display: none;
         }
         footer {
             background-color: #333;
@@ -55,28 +55,36 @@
     </header>
 
     <nav>
-        <a href="#home">主页</a>
-        <a href="#about">关于我们</a>
-        <a href="#contact">联系我们</a>
+        <a onclick="showPage('home')">主页</a>
+        <a onclick="showPage('about')">关于我们</a>
+        <a onclick="showPage('contact')">联系我们</a>
     </nav>
 
-    <div class="container" id="home">
+    <div id="home" class="container content" style="display:block;">
         <h2>主页</h2>
         <p>欢迎访问“消消乐的网站”，这里提供丰富的游戏信息和娱乐内容。</p>
     </div>
 
-    <div class="container" id="about">
+    <div id="about" class="container content">
         <h2>关于我们</h2>
         <p>“消消乐的网站”致力于为游戏爱好者提供多样化的娱乐和互动体验。</p>
     </div>
 
-    <div class="container" id="contact">
+    <div id="contact" class="container content">
         <h2>联系我们</h2>
         <p>如果您有任何问题或建议，请通过我们的联系页面与我们沟通。</p>
     </div>
 
     <footer>
-        <p>&copy; 2024 D Toy - 保留所有权利。</p>
+        <p>&copy; 2024 消消乐的网站 - 保留所有权利。</p>
     </footer>
+
+    <script>
+        function showPage(pageId) {
+            const contents = document.querySelectorAll('.content');
+            contents.forEach(content => content.style.display = 'none');
+            document.getElementById(pageId).style.display = 'block';
+        }
+    </script>
 </body>
 </html>
