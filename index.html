@@ -23,7 +23,7 @@
             position: relative;
         }
         .wave {
-            font-size: 2rem;
+            font-size: 3rem; /* 增大emoji */
             position: absolute;
             right: 20px;
             top: 20px;
@@ -73,7 +73,7 @@
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
             text-align: center;
             position: relative;
-            transition: box-shadow 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
             cursor: pointer;
         }
         .grid-item:hover {
@@ -132,27 +132,20 @@
         const gridItems = document.querySelectorAll('.grid-item');
 
         gridItems.forEach(item => {
-            let initialPosition;
-
             item.addEventListener('mousedown', () => {
-                initialPosition = item.getBoundingClientRect();
                 item.style.transition = 'transform 0.5s ease';
-                item.style.transform = 'scale(1.5) translate(-50%, -50%)';
+                item.style.transform = 'scale(1.5) translate(50%, 50%)';
                 item.style.zIndex = 10;
                 item.style.position = 'fixed';
                 item.style.top = '50%';
                 item.style.left = '50%';
-                item.style.transform = 'translate(-50%, -50%) scale(1.5)';
             });
 
             document.addEventListener('mouseup', () => {
-                if (initialPosition) {
-                    item.style.transition = 'transform 0.3s ease';
-                    item.style.transform = 'none';
-                    item.style.position = 'relative';
-                    item.style.zIndex = 1;
-                    initialPosition = null;
-                }
+                item.style.transition = 'transform 0.3s ease';
+                item.style.transform = 'scale(1) translate(0, 0)';
+                item.style.position = 'relative';
+                item.style.zIndex = 1;
             });
         });
     </script>
