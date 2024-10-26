@@ -9,11 +9,10 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
-            background: url('https://www.transparenttextures.com/patterns/diagmonds-light.png') repeat;
             display: flex;
             flex-direction: column;
-            min-height: 100vh;
             background-color: #f0f0f0;
+            min-height: 100vh;
         }
         header {
             background-color: #4caf50;
@@ -43,15 +42,20 @@
             background-color: #81c784;
             transform: translateY(-5px);
         }
-        .container {
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
             max-width: 1000px;
             margin: 30px auto;
-            padding: 40px;
-            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+        }
+        .grid-item {
+            background-color: white;
+            padding: 30px;
             border-radius: 15px;
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
             text-align: center;
-            flex-grow: 1;
         }
         footer {
             background-color: #4caf50;
@@ -59,6 +63,7 @@
             text-align: center;
             padding: 20px 0;
             box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
+            margin-top: auto;
         }
     </style>
 </head>
@@ -74,24 +79,26 @@
         <a href="#" onclick="showPage('games')">游戏</a>
     </nav>
 
-    <div id="home" class="container content" style="display: block;">
-        <h2>欢迎光临</h2>
-        <p>欢迎来到“示例的网页”主页！</p>
-    </div>
+    <div class="grid-container">
+        <div id="home" class="grid-item" style="display: block;">
+            <h2>欢迎光临</h2>
+            <p>欢迎来到“示例的网页”主页！</p>
+        </div>
 
-    <div id="about" class="container content">
-        <h2>关于我们</h2>
-        <p>我们的目标是提供最佳的用户体验。</p>
-    </div>
+        <div id="about" class="grid-item">
+            <h2>关于我们</h2>
+            <p>我们的目标是提供最佳的用户体验。</p>
+        </div>
 
-    <div id="contact" class="container content">
-        <h2>联系我们</h2>
-        <p>有任何问题？请联系我们。</p>
-    </div>
+        <div id="contact" class="grid-item">
+            <h2>联系我们</h2>
+            <p>有任何问题？请联系我们。</p>
+        </div>
 
-    <div id="games" class="container content">
-        <h2>游戏中心</h2>
-        <p>加入我们的游戏世界，体验无限乐趣！</p>
+        <div id="games" class="grid-item">
+            <h2>游戏中心</h2>
+            <p>加入我们的游戏世界，体验无限乐趣！</p>
+        </div>
     </div>
 
     <footer>
@@ -100,7 +107,7 @@
 
     <script>
         function showPage(pageId) {
-            document.querySelectorAll('.content').forEach(div => {
+            document.querySelectorAll('.grid-item').forEach(div => {
                 div.style.display = 'none';
             });
             document.getElementById(pageId).style.display = 'block';
