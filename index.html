@@ -20,6 +20,22 @@
             text-align: center;
             padding: 50px 0;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+        .wave {
+            font-size: 2rem;
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            animation: wave-animation 1s infinite;
+            transform-origin: 70% 70%;
+        }
+        @keyframes wave-animation {
+            0% { transform: rotate(0deg); }
+            25% { transform: rotate(10deg); }
+            50% { transform: rotate(-10deg); }
+            75% { transform: rotate(10deg); }
+            100% { transform: rotate(0deg); }
         }
         nav {
             display: flex;
@@ -76,6 +92,7 @@
 <body>
     <header>
         <h1>示例的网页</h1>
+        <div class="wave">👋</div>
     </header>
 
     <nav>
