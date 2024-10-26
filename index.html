@@ -49,6 +49,7 @@
             max-width: 1000px;
             margin: 30px auto;
             padding: 20px;
+            transition: transform 0.3s ease;
         }
         .grid-item {
             background-color: white;
@@ -56,6 +57,12 @@
             border-radius: 15px;
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
             text-align: center;
+            position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+        .grid-item:hover {
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
         }
         footer {
             background-color: #4caf50;
@@ -80,7 +87,7 @@
     </nav>
 
     <div class="grid-container">
-        <div id="home" class="grid-item" style="display: block;">
+        <div id="home" class="grid-item">
             <h2>欢迎光临</h2>
             <p>欢迎来到“示例的网页”主页！</p>
         </div>
@@ -106,12 +113,26 @@
     </footer>
 
     <script>
-        function showPage(pageId) {
-            document.querySelectorAll('.grid-item').forEach(div => {
-                div.style.display = 'none';
+        const gridItems = document.querySelectorAll('.grid-item');
+
+        gridItems.forEach(item => {
+            item.addEventListener('mousedown', () => {
+                item.style.transition = 'transform 0.5s ease';
+                item.style.transform = 'scale(1.5) translate(0, -50%)';
+                item.style.zIndex = 10;
+                item.style.position = 'fixed';
+                item.style.top = '50%';
+                item.style.left = '50%';
+                item.style.transform = 'translate(-50%, -50%) scale(1.5)';
             });
-            document.getElementById(pageId).style.display = 'block';
-        }
+
+            item.addEventListener('mouseup', () => {
+                item.style.transition = 'transform 0.3s ease';
+                item.style.transform = 'scale(1)';
+                item.style.position = 'relative';
+                item.style.zIndex = 1;
+            });
+        });
     </script>
 </body>
 </html>
