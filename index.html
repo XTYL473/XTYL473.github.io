@@ -49,7 +49,6 @@
             max-width: 1000px;
             margin: 30px auto;
             padding: 20px;
-            transition: transform 0.3s ease;
         }
         .grid-item {
             background-color: white;
@@ -58,7 +57,7 @@
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
             text-align: center;
             position: relative;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: box-shadow 0.3s ease;
             cursor: pointer;
         }
         .grid-item:hover {
@@ -80,10 +79,10 @@
     </header>
 
     <nav>
-        <a href="#" onclick="showPage('home')">主页</a>
-        <a href="#" onclick="showPage('about')">关于我们</a>
-        <a href="#" onclick="showPage('contact')">联系我们</a>
-        <a href="#" onclick="showPage('games')">游戏</a>
+        <a href="#">主页</a>
+        <a href="#">关于我们</a>
+        <a href="#">联系我们</a>
+        <a href="#">游戏</a>
     </nav>
 
     <div class="grid-container">
@@ -116,9 +115,12 @@
         const gridItems = document.querySelectorAll('.grid-item');
 
         gridItems.forEach(item => {
+            let initialPosition;
+
             item.addEventListener('mousedown', () => {
+                initialPosition = item.getBoundingClientRect();
                 item.style.transition = 'transform 0.5s ease';
-                item.style.transform = 'scale(1.5) translate(0, -50%)';
+                item.style.transform = 'scale(1.5) translate(-50%, -50%)';
                 item.style.zIndex = 10;
                 item.style.position = 'fixed';
                 item.style.top = '50%';
@@ -126,11 +128,14 @@
                 item.style.transform = 'translate(-50%, -50%) scale(1.5)';
             });
 
-            item.addEventListener('mouseup', () => {
-                item.style.transition = 'transform 0.3s ease';
-                item.style.transform = 'scale(1)';
-                item.style.position = 'relative';
-                item.style.zIndex = 1;
+            document.addEventListener('mouseup', () => {
+                if (initialPosition) {
+                    item.style.transition = 'transform 0.3s ease';
+                    item.style.transform = 'none';
+                    item.style.position = 'relative';
+                    item.style.zIndex = 1;
+                    initialPosition = null;
+                }
             });
         });
     </script>
