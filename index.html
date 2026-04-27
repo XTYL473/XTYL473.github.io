@@ -64,9 +64,9 @@
             border-radius: 10px;
             border: 1px solid var(--border);
             transition: transform 0.2s;
-            cursor: pointer;
             text-decoration: none;
             color: inherit;
+            display: block;
         }
 
         .post-card:hover {
@@ -89,96 +89,25 @@
             color: #666;
             font-size: 0.95rem;
         }
-
-        .post-content {
-            margin-top: 1rem;
-            font-size: 1rem;
-            line-height: 1.8;
-        }
-
-        .back {
-            display: inline-block;
-            margin-bottom: 1rem;
-            color: var(--accent);
-            text-decoration: none;
-        }
-
-        .hidden {
-            display: none;
-        }
     </style>
 </head>
 <body>
     <header>
-        <a href="#" class="blog-title" onclick="showList()">我的个人博客</a>
+        <a href="./index.html" class="blog-title">我的个人博客</a>
     </header>
 
-    <!-- 文章列表 -->
-    <div id="list-view">
-        <div class="post-list">
-            <div class="post-card" onclick="showPost(1)">
-                <div class="post-date">2025-12-28</div>
-                <div class="post-title">GitHub Pages 搭建博客完全指南</div>
-                <div class="post-excerpt">零成本、零服务器、零域名，教你用 GitHub 搭建属于自己的免费博客。</div>
-            </div>
-            <div class="post-card" onclick="showPost(2)">
-                <div class="post-date">2025-12-27</div>
-                <div class="post-title">前端新手必学的 5 个知识点</div>
-                <div class="post-excerpt">HTML、CSS、JS 核心基础，看完就能写出自己的第一个网页。</div>
-            </div>
-        </div>
+    <div class="post-list">
+        <a href="./post1.html" class="post-card">
+            <div class="post-date">2026-04-27</div>
+            <div class="post-title">GitHub Pages 搭建博客指南</div>
+            <div class="post-excerpt">免费搭建个人静态博客，无需服务器，小白一键上手。</div>
+        </a>
+
+        <a href="./post2.html" class="post-card">
+            <div class="post-date">2026-04-27</div>
+            <div class="post-title">静态多页面博客结构讲解</div>
+            <div class="post-excerpt">独立HTML页面跳转，结构清晰，方便长期维护。</div>
+        </a>
     </div>
-
-    <!-- 文章内容 -->
-    <div id="post-view" class="hidden">
-        <a href="#" class="back" onclick="showList()">← 返回首页</a>
-        <div id="post-detail"></div>
-    </div>
-
-    <script>
-        // 博客文章数据（在这里新增/编辑文章）
-        const posts = [
-            {
-                id: 1,
-                date: "2025-12-28",
-                title: "GitHub Pages 搭建博客完全指南",
-                content: `
-                    <p>GitHub Pages 是 GitHub 官方提供的免费静态站点托管服务，非常适合搭建个人博客、作品集、文档。</p>
-                    <p>优点：免费、稳定、无需服务器、支持自定义域名、HTTPS 自动生效。</p>
-                    <p>只需要创建一个名为 用户名.github.io 的仓库，把静态页面放进去，就能直接访问。</p>
-                `
-            },
-            {
-                id: 2,
-                date: "2025-12-27",
-                title: "前端新手必学的 5 个知识点",
-                content: `
-                    <p>1. HTML：搭建页面结构</p>
-                    <p>2. CSS：美化页面样式</p>
-                    <p>3. JavaScript：实现交互逻辑</p>
-                    <p>4. 响应式布局：适配手机/平板/电脑</p>
-                    <p>5. Git 基础：代码管理与部署</p>
-                    <p>掌握这些，你就能独立完成简单网站开发啦！</p>
-                `
-            }
-        ];
-
-        function showList() {
-            document.getElementById("list-view").classList.remove("hidden");
-            document.getElementById("post-view").classList.add("hidden");
-        }
-
-        function showPost(id) {
-            const post = posts.find(p => p.id === id);
-            if (!post) return;
-            document.getElementById("list-view").classList.add("hidden");
-            document.getElementById("post-view").classList.remove("hidden");
-            document.getElementById("post-detail").innerHTML = `
-                <div class="post-date">${post.date}</div>
-                <h2 class="post-title">${post.title}</h2>
-                <div class="post-content">${post.content}</div>
-            `;
-        }
-    </script>
 </body>
 </html>
