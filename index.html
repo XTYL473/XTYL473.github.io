@@ -3,151 +3,182 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>示例的网页</title>
+    <title>我的个人博客</title>
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        :root {
+            --bg: #ffffff;
+            --text: #222;
+            --card: #f8f9fa;
+            --border: #eee;
+            --accent: #0070f3;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #121212;
+                --text: #eaeaea;
+                --card: #1e1e1e;
+                --border: #333;
+                --accent: #58a6ff;
+            }
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        header {
+            margin-bottom: 2rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 1rem;
+        }
+
+        .blog-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .post-list {
             display: flex;
             flex-direction: column;
-            background-color: #f0f0f0;
-            min-height: 100vh;
+            gap: 1.5rem;
         }
-        header {
-            background-color: #4caf50;
-            color: white;
-            text-align: center;
-            padding: 50px 0;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            position: relative;
-        }
-        .wave {
-            font-size: 3rem; /* 增大emoji */
-            position: absolute;
-            right: 20px;
-            top: 20px;
-            animation: wave-animation 1s infinite;
-            transform-origin: 70% 70%;
-        }
-        @keyframes wave-animation {
-            0% { transform: rotate(0deg); }
-            25% { transform: rotate(10deg); }
-            50% { transform: rotate(-10deg); }
-            75% { transform: rotate(10deg); }
-            100% { transform: rotate(0deg); }
-        }
-        nav {
-            display: flex;
-            justify-content: center;
-            background-color: #388e3c;
-            padding: 15px 0;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-        }
-        nav a {
-            color: white;
-            padding: 10px 20px;
-            text-decoration: none;
-            border-radius: 25px;
-            margin: 0 10px;
-            background-color: #66bb6a;
-            transition: transform 0.3s, background-color 0.3s;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        nav a:hover {
-            background-color: #81c784;
-            transform: translateY(-5px);
-        }
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 20px;
-            max-width: 1000px;
-            margin: 30px auto;
-            padding: 20px;
-        }
-        .grid-item {
-            background-color: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-            text-align: center;
-            position: relative;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+        .post-card {
+            background: var(--card);
+            padding: 1.25rem;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            transition: transform 0.2s;
             cursor: pointer;
+            text-decoration: none;
+            color: inherit;
         }
-        .grid-item:hover {
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+
+        .post-card:hover {
+            transform: translateY(-2px);
         }
-        footer {
-            background-color: #4caf50;
-            color: white;
-            text-align: center;
-            padding: 20px 0;
-            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
-            margin-top: auto;
+
+        .post-date {
+            font-size: 0.85rem;
+            color: #888;
+            margin-bottom: 0.5rem;
+        }
+
+        .post-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .post-excerpt {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        .post-content {
+            margin-top: 1rem;
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+
+        .back {
+            display: inline-block;
+            margin-bottom: 1rem;
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .hidden {
+            display: none;
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>示例的网页</h1>
-        <div class="wave">👋</div>
+        <a href="#" class="blog-title" onclick="showList()">我的个人博客</a>
     </header>
 
-    <nav>
-        <a href="#">主页</a>
-        <a href="#">关于我们</a>
-        <a href="#">联系我们</a>
-        <a href="#">游戏</a>
-    </nav>
-
-    <div class="grid-container">
-        <div id="home" class="grid-item">
-            <h2>欢迎光临</h2>
-            <p>欢迎来到“示例的网页”主页！</p>
-        </div>
-
-        <div id="about" class="grid-item">
-            <h2>关于我们</h2>
-            <p>我们的目标是提供最佳的用户体验。</p>
-        </div>
-
-        <div id="contact" class="grid-item">
-            <h2>联系我们</h2>
-            <p>有任何问题？请联系我们。</p>
-        </div>
-
-        <div id="games" class="grid-item">
-            <h2>游戏中心</h2>
-            <p>加入我们的游戏世界，体验无限乐趣！</p>
+    <!-- 文章列表 -->
+    <div id="list-view">
+        <div class="post-list">
+            <div class="post-card" onclick="showPost(1)">
+                <div class="post-date">2025-12-28</div>
+                <div class="post-title">GitHub Pages 搭建博客完全指南</div>
+                <div class="post-excerpt">零成本、零服务器、零域名，教你用 GitHub 搭建属于自己的免费博客。</div>
+            </div>
+            <div class="post-card" onclick="showPost(2)">
+                <div class="post-date">2025-12-27</div>
+                <div class="post-title">前端新手必学的 5 个知识点</div>
+                <div class="post-excerpt">HTML、CSS、JS 核心基础，看完就能写出自己的第一个网页。</div>
+            </div>
         </div>
     </div>
 
-    <footer>
-        <p>&copy; 2024 示例的网页。保留所有权利。</p>
-    </footer>
+    <!-- 文章内容 -->
+    <div id="post-view" class="hidden">
+        <a href="#" class="back" onclick="showList()">← 返回首页</a>
+        <div id="post-detail"></div>
+    </div>
 
     <script>
-        const gridItems = document.querySelectorAll('.grid-item');
+        // 博客文章数据（在这里新增/编辑文章）
+        const posts = [
+            {
+                id: 1,
+                date: "2025-12-28",
+                title: "GitHub Pages 搭建博客完全指南",
+                content: `
+                    <p>GitHub Pages 是 GitHub 官方提供的免费静态站点托管服务，非常适合搭建个人博客、作品集、文档。</p>
+                    <p>优点：免费、稳定、无需服务器、支持自定义域名、HTTPS 自动生效。</p>
+                    <p>只需要创建一个名为 用户名.github.io 的仓库，把静态页面放进去，就能直接访问。</p>
+                `
+            },
+            {
+                id: 2,
+                date: "2025-12-27",
+                title: "前端新手必学的 5 个知识点",
+                content: `
+                    <p>1. HTML：搭建页面结构</p>
+                    <p>2. CSS：美化页面样式</p>
+                    <p>3. JavaScript：实现交互逻辑</p>
+                    <p>4. 响应式布局：适配手机/平板/电脑</p>
+                    <p>5. Git 基础：代码管理与部署</p>
+                    <p>掌握这些，你就能独立完成简单网站开发啦！</p>
+                `
+            }
+        ];
 
-        gridItems.forEach(item => {
-            item.addEventListener('mousedown', () => {
-                item.style.transition = 'transform 0.5s ease';
-                item.style.transform = 'scale(1.5) translate(50%, 50%)';
-                item.style.zIndex = 10;
-                item.style.position = 'fixed';
-                item.style.top = '50%';
-                item.style.left = '50%';
-            });
+        function showList() {
+            document.getElementById("list-view").classList.remove("hidden");
+            document.getElementById("post-view").classList.add("hidden");
+        }
 
-            document.addEventListener('mouseup', () => {
-                item.style.transition = 'transform 0.3s ease';
-                item.style.transform = 'scale(1) translate(0, 0)';
-                item.style.position = 'relative';
-                item.style.zIndex = 1;
-            });
-        });
+        function showPost(id) {
+            const post = posts.find(p => p.id === id);
+            if (!post) return;
+            document.getElementById("list-view").classList.add("hidden");
+            document.getElementById("post-view").classList.remove("hidden");
+            document.getElementById("post-detail").innerHTML = `
+                <div class="post-date">${post.date}</div>
+                <h2 class="post-title">${post.title}</h2>
+                <div class="post-content">${post.content}</div>
+            `;
+        }
     </script>
 </body>
 </html>
